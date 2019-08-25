@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Cuenta, SalesAccountTrimester
 from django.views import generic
-
+from django.http import JsonResponse
 # Create your views here.
 
 
@@ -15,16 +15,12 @@ def index(request):
         context={'FromIndexAccount': list_cuenta}
     )
 
-#
-# def show_data(request):
-#
-#     list_cuenta = Cuenta.objects.all()
-#
-#     return render(
-#         request,
-#         'base_generic.html',
-#         context={'MuestraCuenta': list_cuenta}
-#     )
+
+def get_data(request, *args, **kwargs):
+    data = {"year": [2018, 2019],
+            "sales": [340, 232],
+            "buy": [394, 345]}
+    return JsonResponse(data)
 
 
 class CuentaDetailView(generic.DetailView):
@@ -32,7 +28,5 @@ class CuentaDetailView(generic.DetailView):
     list_cuenta = {'MuestraCuenta': Cuenta.objects.all()}
 
 
-class AccountTrimesterDetailView(generic.DeleteView):
+class SalesAccountTrimesterListView(generic.ListView):
     model = SalesAccountTrimester
-    list_sales = {'MuestraCuenta': SalesAccountTrimester.objects.all()}
-

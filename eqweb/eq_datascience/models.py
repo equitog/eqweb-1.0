@@ -25,14 +25,14 @@ class Cuenta(models.Model):
 
     status_cuenta = models.BooleanField(verbose_name="Estado",
                                         default=True,
-                                        null=False,
-                                        blank=False,
+                                        null=True,
+                                        blank=True,
                                         choices=LOAN_STATUS,
                                         help_text="Ingrese un estado para la cuenta.")
 
     date_since = models.DateTimeField(verbose_name="Fecha de Actividad.",
-                                      blank=False,
-                                      null=False,
+                                      blank=True,
+                                      null=True,
                                       help_text="Ingrese la fecha de actividad para la cuenta.")
 
     date_until = models.DateTimeField(verbose_name="Fecha de Inactividad",
@@ -44,8 +44,8 @@ class Cuenta(models.Model):
 
         return self.name_cuenta
 
-    def get_absolute_url(self):
-        return reverse('cuenta-detail', args=[str(self.id_cuenta)])
+    # def get_absolute_url(self):
+    #     return reverse('cuenta-detail', args=[str(self.id_cuenta)])
 
 
 class SalesAccountTrimester(models.Model):
@@ -59,5 +59,5 @@ class SalesAccountTrimester(models.Model):
     def __str__(self):
         return self.account
 
-    def get_absolute_url(self):
-        return reverse('trimester-detail', args=[str(self.account)])
+    # def get_absolute_url(self):
+    #     return reverse('salesaccounttrimester-detail', args=[str(self.account)])
